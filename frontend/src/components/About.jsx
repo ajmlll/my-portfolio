@@ -32,7 +32,7 @@ const About = () => {
               
               {/* Actual Image */}
               <img 
-                src="/profile.jpg" 
+                src="/profile.jpeg" 
                 alt="Muhammed Ajmal" 
                 style={{
                   width: '100%',
