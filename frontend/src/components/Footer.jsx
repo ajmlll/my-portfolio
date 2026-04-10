@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-scroll';
-import { FaGithub, FaLinkedin, FaTwitter, FaCodepen, FaHeart } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaHeart } from 'react-icons/fa';
 
 const Footer = () => {
   return (
