@@ -113,11 +113,6 @@ const Projects = () => {
                   </div>
                 </div>
 
-                <style>{`
-                  .custom-card:hover .bg-overlay { opacity: 1 !important; }
-                  .custom-card:hover .action-btn { transform: translateY(0) !important; }
-                `}</style>
-
                 {/* Content Area */}
                 <div className="p-4 flex-grow-1 d-flex flex-column">
                   <h3 className="h5 text-primary mb-3">{project.title}</h3>
@@ -137,6 +132,21 @@ const Projects = () => {
           ))}
         </Row>
       </Container>
+      <style>{`
+        .custom-card:hover .bg-overlay { 
+          opacity: 1 !important; 
+        }
+        .custom-card:hover .action-btn { 
+          transform: translateY(0) !important; 
+        }
+        .bg-overlay {
+          z-index: 10;
+        }
+        .action-btn:hover {
+          transform: scale(1.1) !important;
+          box-shadow: 0 0 15px var(--gold-dim);
+        }
+      `}</style>
     </section>
   );
 };

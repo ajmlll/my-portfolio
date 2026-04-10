@@ -80,14 +80,23 @@ const SocialLink = ({ href, icon }) => (
     href={href} 
     target="_blank" 
     rel="noreferrer"
-    className="text-dim transition-all nav-link"
+    className="transition-all"
     style={{ 
-      width: '40px', height: '40px', borderRadius: '50%', backgroundColor: 'var(--bg-secondary)',
+      width: '45px', height: '45px', borderRadius: '50%', backgroundColor: 'rgba(201, 168, 76, 0.1)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
-      border: '1px solid transparent'
+      border: '1px solid var(--gold-border)', color: 'var(--gold)',
+      textDecoration: 'none', position: 'relative', zIndex: 1
     }}
-    onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--gold)'; e.currentTarget.style.color = 'var(--gold)'; }}
-    onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'transparent'; e.currentTarget.style.color = 'var(--text-secondary)'; }}
+    onMouseEnter={(e) => { 
+      e.currentTarget.style.backgroundColor = 'var(--gold)'; 
+      e.currentTarget.style.color = 'var(--bg-primary)';
+      e.currentTarget.style.transform = 'translateY(-3px)';
+    }}
+    onMouseLeave={(e) => { 
+      e.currentTarget.style.backgroundColor = 'rgba(201, 168, 76, 0.1)'; 
+      e.currentTarget.style.color = 'var(--gold)';
+      e.currentTarget.style.transform = 'translateY(0)';
+    }}
   >
     {icon}
   </a>

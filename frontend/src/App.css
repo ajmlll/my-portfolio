@@ -147,6 +147,7 @@ section {
   mask-composite: exclude;
   transition: all 0.5s ease;
   opacity: 0.5;
+  pointer-events: none;
 }
 
 .custom-card:hover {
