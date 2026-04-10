@@ -6,7 +6,7 @@ const projectsData = [
   {
     id: 1,
     title: 'OLX-Style Marketplace Platform',
-    description: 'Engineered full-stack classified marketplace platform with 500+ dynamic product listings and advanced search capabilities. Reduced initial page load by 65%.',
+    description: 'A full-stack classified marketplace platform featuring dynamic product listings, advanced search filters, and a seamless user experience. Optimized for performance with a 65% reduction in initial page load time.',
     image: '🛍️',
     category: 'fullstack',
     tech: ['React.js', 'Node.js', 'MongoDB', 'Cloudinary', 'JWT'],
@@ -16,24 +16,24 @@ const projectsData = [
   },
   {
     id: 2,
-    title: 'E-Commerce Platform',
-    description: 'Developed a production-ready e-commerce solution processing 200+ daily transactions. Integrated Razorpay payment gateway to achieve 99.8% transaction success rate.',
+    title: 'Full-Stack E-Commerce Solution',
+    description: 'A production-ready e-commerce platform integrated with a powerful Admin Dashboard. Features real-time inventory management, sales analytics, secure Razorpay payments, and automated order tracking.',
     image: '🛒',
     category: 'fullstack',
-    tech: ['React.js', 'Express.js', 'MongoDB', 'Razorpay', 'JWT'],
+    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST API', 'Razorpay', 'JWT'],
     github: 'https://github.com/ajmll1',
     live: 'https://kickslabshoes.online',
     featured: true
   },
   {
     id: 3,
-    title: 'E-Commerce Admin Dashboard',
-    description: 'Engineered the comprehensive admin dashboard for the e-commerce platform enabling real-time product management, user administration, order tracking, and sales analytics.',
-    image: '⚙️',
-    category: 'backend',
+    title: 'Personal Portfolio Website',
+    description: 'A premium, high-performance portfolio designed with a focus on modern aesthetics and smooth user interactions. Built with a full MERN stack to handle contact queries and dynamic content delivery.',
+    image: '💻',
+    category: 'fullstack',
     tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST API'],
-    github: 'https://github.com/ajmll1',
-    live: '#',
+    github: 'https://github.com/ajmlll/my-portfolio',
+    live: 'https://muhammedajmal-portfolio.vercel.app/',
     featured: true
   }
 ];
@@ -81,39 +81,42 @@ const Projects = () => {
                 
                 {/* Thumbnail Area */}
                 <div 
-                  className="bg-dark d-flex align-items-center justify-content-center position-relative overflow-hidden"
-                  style={{ height: '200px', borderBottom: '1px solid var(--gold-border)' }}
+                  className="d-flex align-items-center justify-content-center position-relative overflow-hidden"
+                  style={{ height: '200px', background: 'rgba(0,0,0,0.2)', borderBottom: '1px solid var(--gold-border)' }}
                 >
-                  <span style={{ fontSize: '5rem', filter: 'drop-shadow(0 10px 10px rgba(0,0,0,0.5))' }}>
+                  <span className="project-icon" style={{ fontSize: '5rem' }}>
                     {project.image}
                   </span>
                   
                   {project.featured && (
-                    <Badge bg="gold" style={{ position: 'absolute', top: '15px', right: '15px', backgroundColor: 'var(--gold)', color: '#000' }}>
+                    <Badge bg="gold" style={{ position: 'absolute', top: '15px', right: '15px', backgroundColor: 'var(--gold)', color: '#000', fontSize: '0.7rem', fontWeight: 'bold' }}>
                       Featured
                     </Badge>
                   )}
 
                   {/* Hover Actions Overlay */}
                   <div 
-                    className="position-absolute w-100 h-100 d-flex gap-3 align-items-center justify-content-center"
+                    className="position-absolute w-100 h-100 d-flex gap-3 align-items-center justify-content-center transition-all bg-overlay"
                     style={{ 
-                      background: 'rgba(13, 13, 13, 0.8)', backdropFilter: 'blur(4px)',
-                      opacity: 0, transition: 'opacity 0.3s ease', 
+                      background: 'rgba(13, 13, 13, 0.4)', backdropFilter: 'blur(4px)',
+                      opacity: 0, transition: 'all 0.4s ease', 
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.opacity = '1'}
-                    onMouseLeave={(e) => e.currentTarget.style.opacity = '0'}
                   >
-                    <a href={project.github} target="_blank" rel="noreferrer" className="btn btn-outline-gold rounded-circle d-flex align-items-center justify-content-center p-0" style={{ width: '45px', height: '45px' }} title="View Source">
+                    <a href={project.github} target="_blank" rel="noreferrer" className="btn btn-outline-gold rounded-circle d-flex align-items-center justify-content-center p-0 action-btn" style={{ width: '45px', height: '45px', transform: 'translateY(20px)', transition: 'all 0.4s ease' }} title="View Source">
                       <FaGithub size={20} />
                     </a>
                     {project.live !== '#' && (
-                      <a href={project.live} target="_blank" rel="noreferrer" className="btn btn-gold rounded-circle d-flex align-items-center justify-content-center p-0" style={{ width: '45px', height: '45px' }} title="Live Demo">
+                      <a href={project.live} target="_blank" rel="noreferrer" className="btn btn-gold rounded-circle d-flex align-items-center justify-content-center p-0 action-btn" style={{ width: '45px', height: '45px', transform: 'translateY(20px)', transition: 'all 0.4s ease 0.1s' }} title="Live Demo">
                         <FaExternalLinkAlt size={18} />
                       </a>
                     )}
                   </div>
                 </div>
+
+                <style>{`
+                  .custom-card:hover .bg-overlay { opacity: 1 !important; }
+                  .custom-card:hover .action-btn { transform: translateY(0) !important; }
+                `}</style>
 
                 {/* Content Area */}
                 <div className="p-4 flex-grow-1 d-flex flex-column">

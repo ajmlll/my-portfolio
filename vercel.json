@@ -1,15 +1,16 @@
 {
   "version": 2,
+  "name": "portfolio",
   "builds": [
     {
       "src": "frontend/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "build"
+        "distDir": "dist"
       }
     },
     {
-      "src": "api/contact.js",
+      "src": "api/**/*.js",
       "use": "@vercel/node"
     }
   ],
@@ -22,5 +23,8 @@
       "src": "/(.*)",
       "dest": "/frontend/$1"
     }
-  ]
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }

@@ -16,8 +16,8 @@ const Contact = () => {
     setStatus({ sending: true, success: false, error: null });
 
     try {
-      const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000/api';
-      await axios.post(`${apiUrl}/contact`, formData);
+      const API_URL = import.meta.env.VITE_API_URL || '/api';
+      await axios.post(`${API_URL}/contact`, formData);
       setStatus({ sending: false, success: true, error: null });
       setFormData({ name: '', email: '', subject: '', message: '' });
       setTimeout(() => setStatus(prev => ({ ...prev, success: false })), 5000);

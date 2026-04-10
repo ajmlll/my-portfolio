@@ -123,35 +123,59 @@ section {
 
 /* Card Styles */
 .custom-card {
-  background-color: var(--bg-card);
+  background: rgba(26, 26, 26, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--gold-border);
-  border-radius: 12px;
-  transition: all 0.4s ease;
+  border-radius: 16px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
 }
 
-.custom-card::before {
+.custom-card::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-  background-color: var(--gold);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.4s ease;
+  inset: 0;
+  border-radius: 16px;
+  padding: 1px; 
+  background: linear-gradient(135deg, transparent, var(--gold-border), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transition: all 0.5s ease;
+  opacity: 0.5;
 }
 
 .custom-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px var(--gold-dim);
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px var(--gold-dim);
   border-color: var(--gold);
 }
 
-.custom-card:hover::before {
-  transform: scaleX(1);
+.custom-card:hover::after {
+  background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+  background-size: 200% 200%;
+  animation: borderRotate 3s linear infinite;
+  opacity: 1;
+}
+
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.custom-card .project-icon {
+  transition: all 0.5s ease;
+  filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
+}
+
+.custom-card:hover .project-icon {
+  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 0 15px var(--gold-dim));
 }
 
 /* Common Section Heading */
