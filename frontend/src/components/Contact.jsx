@@ -84,7 +84,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <span className="d-block small text-dim">Connect</span>
-                      <a href="https://linkedin.com/in/alexmorgan" target="_blank" rel="noreferrer" className="text-primary text-decoration-none">LinkedIn Profile</a>
+                      <a href="https://www.linkedin.com/in/ajmal-ajuuu-807114325" target="_blank" rel="noreferrer" className="text-primary text-decoration-none">LinkedIn Profile</a>
                     </div>
                   </div>
                 </div>

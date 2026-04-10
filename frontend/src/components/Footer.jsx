@@ -34,8 +34,8 @@ const Footer = () => {
               A Full Stack Developer dedicated to building functional, scalable, and beautifully designed web experiences.
             </p>
             <div className="d-flex gap-3 mt-4">
-              <SocialLink href="https://github.com/ajmll1" icon={<FaGithub size={20} />} />
-              <SocialLink href="https://www.linkedin.com/in/muhammedajmalpm" icon={<FaLinkedin size={20} />} />
+              <SocialLink href="https://github.com/ajmlll" icon={<FaGithub size={20} />} />
+              <SocialLink href="https://www.linkedin.com/in/ajmal-ajuuu-807114325" icon={<FaLinkedin size={20} />} />
             </div>
           </Col>
           

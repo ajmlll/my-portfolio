@@ -9,6 +9,6 @@
     "install:all": "cd backend && npm install && cd ../frontend && npm install --legacy-peer-deps",
     "build": "cd frontend && npm run build"
   },
-  "author": "Alex Morgan",
+  "author": "Muhammed Ajmal PM",
   "license": "ISC"
 }

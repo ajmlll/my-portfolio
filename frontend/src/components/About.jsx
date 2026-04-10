@@ -25,7 +25,7 @@ const About = () => {
                 left: '25px',
                 width: '100%',
                 height: '100%',
-                border: '3px solid #0ea5e9', /* Cyan border matching your screenshot */
+                border: '3px solid var(--gold)',
                 borderRadius: '8px',
                 zIndex: 0
               }}></div>

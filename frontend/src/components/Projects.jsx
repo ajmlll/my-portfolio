@@ -10,7 +10,7 @@ const projectsData = [
     image: '🛍️',
     category: 'fullstack',
     tech: ['React.js', 'Node.js', 'MongoDB', 'Cloudinary', 'JWT'],
-    github: 'https://github.com/ajmll1/Olxclone',
+    github: 'https://github.com/ajmlll/Olxclone',
     live: '#',
     featured: true
   },
@@ -21,7 +21,7 @@ const projectsData = [
     image: '🛒',
     category: 'fullstack',
     tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST API', 'Razorpay', 'JWT'],
-    github: 'https://github.com/ajmll1',
+    github: 'https://github.com/ajmlll/kickslab-ecommerce',
     live: 'https://kickslabshoes.online',
     featured: true
   },
