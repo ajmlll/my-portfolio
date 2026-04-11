@@ -114,31 +114,46 @@ module.exports = async (req, res) => {
     });
 
     const mailOptions = {
-      from: process.env.EMAIL_FROM,
+      from: `"Portfolio Contact" <${process.env.EMAIL_FROM}>`,
       to: process.env.EMAIL_TO,
-      subject: `Portfolio Contact: ${subject}`,
+      subject: `📬 New Message from ${name}: ${subject}`,
+      replyTo: email,
       html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #0d0d0d; color: #f0ece3;">
-          <h2 style="color: #c9a84c;">New Contact Message</h2>
-          <p><strong>Name:</strong> ${name}</p>
-          <p><strong>Email:</strong> ${email}</p>
-          <p><strong>Subject:</strong> ${subject}</p>
-          <hr style="border-color: #333;" />
-          <p><strong>Message:</strong></p>
-          <p style="white-space: pre-wrap;">${message}</p>
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #c9a84c; border-radius: 8px; overflow: hidden; background-color: #000; color: #fff;">
+          <div style="background-color: #c9a84c; color: #000; padding: 20px; text-align: center;">
+            <h1 style="margin: 0; font-size: 24px;">New Portfolio Inquiry</h1>
+          </div>
+          <div style="padding: 24px;">
+            <p style="font-size: 16px; border-bottom: 1px solid #333; padding-bottom: 10px;"><strong>Client Details</strong></p>
+            <p><strong>Name:</strong> ${name}</p>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Subject:</strong> ${subject}</p>
+            
+            <p style="font-size: 16px; border-bottom: 1px solid #333; padding-bottom: 10px; margin-top: 30px;"><strong>Message Content</strong></p>
+            <div style="background-color: #111; padding: 15px; border-radius: 4px; border-left: 4px solid #c9a84c; white-space: pre-wrap;">${message}</div>
+          </div>
+          <div style="background-color: #111; padding: 15px; font-size: 12px; color: #888; text-align: center;">
+            <p>Sent from portfolio at ${new Date().toLocaleString()}</p>
+            <p>Source IP: ${clientIp}</p>
+          </div>
         </div>
       `
     };
 
     const autoReplyOptions = {
-      from: process.env.EMAIL_FROM,
+      from: `"Muhammed Ajmal PM" <${process.env.EMAIL_FROM}>`,
       to: email,
-      subject: `Thank you for contacting Muhammed Ajmal PM`,
+      subject: `Confirmation: I've received your message!`,
       html: `
-        <div style="font-family: Arial, sans-serif; padding: 20px;">
-          <h2>Hi ${name},</h2>
-          <p>Thank you for reaching out! I have received your message regarding "${subject}" and will get back to you as soon as possible.</p>
-          <p>Best regards,<br/>Muhammed Ajmal PM</p>
+        <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; color: #333; line-height: 1.6;">
+          <h2 style="color: #c9a84c;">Hello ${name},</h2>
+          <p>Thank you for reaching out through my portfolio website. I've successfully received your message regarding <strong>"${subject}"</strong>.</p>
+          <p>I typically respond to all inquiries within 24-48 hours. If your request is urgent, feel free to connect with me on LinkedIn as well.</p>
+          <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+          <p>Best regards,<br/><strong>Muhammed Ajmal PM</strong><br/>Full Stack Developer</p>
+          <div style="font-size: 12px; color: #999; margin-top: 20px;">
+            <p>This is an automated confirmation. Please do not reply directly to this email unless I reach out first.</p>
+          </div>
         </div>
       `
     };

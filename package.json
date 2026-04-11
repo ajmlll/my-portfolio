@@ -4,10 +4,11 @@
   "description": "Full Stack Developer Portfolio",
   "scripts": {
     "start": "node backend/server.js",
+    "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend && npm run dev",
-    "dev:frontend": "cd frontend && npm start",
     "install:all": "cd backend && npm install && cd ../frontend && npm install --legacy-peer-deps",
-    "build": "cd frontend && npm run build"
+    "build:frontend": "cd frontend && npm run build",
+    "build": "npm run build:frontend"
   },
   "dependencies": {
     "nodemailer": "^6.9.13",
