@@ -97,8 +97,16 @@ module.exports = async (req, res) => {
 
     const { name, email, subject, message } = req.body;
 
+    // Validate environment variables
+    if (!process.env.EMAIL_FROM || !process.env.EMAIL_PASS || !process.env.EMAIL_TO) {
+      console.error('Missing configuration: EMAIL_FROM, EMAIL_PASS, or EMAIL_TO');
+      return res.status(500).json({ message: 'Mail server configuration missing.' });
+    }
+
     const transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
       auth: {
         user: process.env.EMAIL_FROM,
         pass: process.env.EMAIL_PASS

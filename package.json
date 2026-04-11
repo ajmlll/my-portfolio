@@ -9,6 +9,10 @@
     "install:all": "cd backend && npm install && cd ../frontend && npm install --legacy-peer-deps",
     "build": "cd frontend && npm run build"
   },
+  "dependencies": {
+    "nodemailer": "^6.9.13",
+    "express-validator": "^7.0.1"
+  },
   "author": "Muhammed Ajmal PM",
   "license": "ISC"
 }
