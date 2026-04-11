@@ -1,19 +1,6 @@
 {
   "version": 2,
   "name": "portfolio",
-  "builds": [
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
-    },
-    {
-      "src": "api/**/*.js",
-      "use": "@vercel/node"
-    }
-  ],
   "functions": {
     "api/*.js": {
       "memory": 1024,
