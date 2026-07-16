@@ -110,10 +110,10 @@ const Projects = () => {
                 {/* Content Area */}
                 <div className="p-4 p-md-5 flex-grow-1 d-flex flex-column justify-content-between">
                   <div>
-                    <h3 className="h4 text-primary mb-3 font-monospace" style={{ transition: 'color 0.3s ease', letterSpacing: '-0.01em', fontWeight: 800 }}>
+                    <h3 className="h5 text-primary mb-3" style={{ transition: 'color 0.3s ease', fontWeight: 500, fontFamily: 'var(--font-body)', letterSpacing: '0' }}>
                       {project.title}
                     </h3>
-                    <p className="text-secondary mb-4" style={{ lineHeight: '1.7', fontSize: '0.95rem' }}>
+                    <p className="text-secondary mb-4" style={{ lineHeight: '1.7', fontSize: '0.95rem', minHeight: '110px' }}>
                       {project.description}
                     </p>
                   </div>
