@@ -54,9 +54,9 @@ const Hero = () => {
           <Col lg={5} className="d-none d-lg-block reveal delay-2">
             <div className="custom-card p-4" style={{ position: 'relative', border: '1px solid rgba(99, 102, 241, 0.2)' }}>
               {/* Floating tags */}
-              <Badge bg="dark" className="position-absolute" style={{ top: '-10px', right: '20px', border: '1px solid var(--gold)', color: 'var(--gold)' }}>MongoDB</Badge>
-              <Badge bg="dark" className="position-absolute" style={{ bottom: '40px', left: '-20px', border: '1px solid var(--indigo)', color: 'var(--indigo)' }}>React.js</Badge>
-              <Badge bg="dark" className="position-absolute" style={{ bottom: '-10px', right: '40px', border: '1px solid var(--gold)', color: 'var(--gold)' }}>Node.js</Badge>
+              <Badge bg="dark" className="position-absolute floating-badge-1" style={{ top: '-10px', right: '20px', border: '1px solid var(--gold)', color: 'var(--gold)' }}>MongoDB</Badge>
+              <Badge bg="dark" className="position-absolute floating-badge-2" style={{ bottom: '40px', left: '-20px', border: '1px solid var(--indigo)', color: 'var(--indigo)' }}>React.js</Badge>
+              <Badge bg="dark" className="position-absolute floating-badge-3" style={{ bottom: '-10px', right: '40px', border: '1px solid var(--gold)', color: 'var(--gold)' }}>Node.js</Badge>
 
               <AppWindow />
             </div>

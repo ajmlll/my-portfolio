@@ -144,18 +144,21 @@ const ProgressBar = ({ name, value, delay }) => {
         <span className="font-monospace text-primary" style={{ fontSize: '0.9rem' }}>{name}</span>
         <span className="text-gold font-monospace" style={{ fontSize: '0.9rem' }}>{value}%</span>
       </div>
-      <div style={{ height: '6px', backgroundColor: 'var(--bg-secondary)', borderRadius: '3px', overflow: 'hidden' }}>
+      <div style={{ height: '6px', backgroundColor: 'var(--bg-secondary)', borderRadius: '3px', overflow: 'visible', position: 'relative' }}>
         <div 
           ref={barRef}
           style={{ 
             height: '100%', 
             width: '0%', 
-            background: 'linear-gradient(90deg, var(--gold), var(--gold-light))', 
+            background: 'linear-gradient(90deg, var(--gold), var(--indigo))', 
             borderRadius: '3px',
             transition: 'width 1.5s cubic-bezier(0.16, 1, 0.3, 1)',
-            boxShadow: '0 0 10px rgba(201, 168, 76, 0.3)'
+            boxShadow: '0 0 10px rgba(6, 182, 212, 0.3)',
+            position: 'relative'
           }}
-        ></div>
+        >
+          <div className="progress-bar-dot"></div>
+        </div>
       </div>
     </div>
   );

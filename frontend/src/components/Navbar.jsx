@@ -27,11 +27,18 @@ const Navigation = () => {
       fixed="top"
       variant="dark"
       style={{
-        transition: 'all 0.3s ease',
-        backgroundColor: navBackground ? 'rgba(13, 13, 13, 0.85)' : 'transparent',
-        backdropFilter: navBackground ? 'blur(10px)' : 'none',
-        borderBottom: navBackground ? '1px solid var(--gold-border)' : 'none',
-        padding: navBackground ? '10px 0' : '20px 0'
+        transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+        backgroundColor: navBackground ? 'rgba(11, 15, 25, 0.75)' : 'transparent',
+        backdropFilter: navBackground ? 'blur(16px)' : 'none',
+        borderBottom: navBackground ? '1px solid rgba(99, 102, 241, 0.2)' : 'none',
+        padding: navBackground ? '10px 0' : '22px 0',
+        marginTop: navBackground ? '12px' : '0px',
+        width: navBackground ? '90%' : '100%',
+        left: navBackground ? '5%' : '0',
+        borderRadius: navBackground ? '50px' : '0px',
+        boxShadow: navBackground ? '0 10px 30px -10px rgba(3, 7, 18, 0.5), 0 0 15px rgba(99, 102, 241, 0.05)' : 'none',
+        border: navBackground ? '1px solid rgba(99, 102, 241, 0.15)' : 'none',
+        zIndex: 1000
       }}
     >
       <Container>
