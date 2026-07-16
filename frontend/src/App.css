@@ -1,18 +1,21 @@
 :root {
-  --bg-primary: #050508;
-  --bg-secondary: #0b0b10;
-  --bg-card: rgba(18, 18, 26, 0.5);
-  --gold: #c9a84c;
-  --gold-light: #f3e5ab;
-  --gold-dim: rgba(201, 168, 76, 0.12);
-  --gold-border: rgba(201, 168, 76, 0.18);
-  --text-primary: #f8f6f0;
-  --text-secondary: #c0bca9;
-  --text-muted: #8c887a;
+  --bg-primary: #030712;
+  --bg-secondary: #0b0f19;
+  --bg-card: rgba(17, 24, 39, 0.45);
+  --gold: #06b6d4;         /* Cyber Cyan primary */
+  --gold-light: #38bdf8;   /* Cyber Light Cyan */
+  --gold-dim: rgba(6, 182, 212, 0.12);
+  --gold-border: rgba(99, 102, 241, 0.25); /* Indigo border for cards */
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
   
   --font-heading: 'Syne', sans-serif;
   --font-body: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  
+  --indigo: #6366f1;
+  --cyan: #06b6d4;
 }
 
 body {
@@ -21,8 +24,9 @@ body {
   font-family: var(--font-body);
   overflow-x: hidden;
   background-image: 
-    radial-gradient(circle at 10% 20%, rgba(201, 168, 76, 0.04) 0%, transparent 40%),
-    radial-gradient(circle at 90% 80%, rgba(201, 168, 76, 0.04) 0%, transparent 40%);
+    radial-gradient(circle at 10% 20%, rgba(99, 102, 241, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.03) 0%, transparent 50%);
 }
 
 /* Override Bootstrap Colors */
@@ -75,8 +79,8 @@ section {
 
 /* Global Buttons */
 .btn-gold {
-  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-  color: #050508;
+  background: linear-gradient(135deg, var(--gold) 0%, var(--indigo) 100%);
+  color: #030712;
   border: none;
   font-weight: 600;
   padding: 12px 28px;
@@ -86,6 +90,7 @@ section {
   overflow: hidden;
   z-index: 1;
   font-family: var(--font-body);
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.15);
 }
 
 .btn-gold::after {
@@ -102,8 +107,8 @@ section {
 
 .btn-gold:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(201, 168, 76, 0.25);
-  color: #050508;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.35);
+  color: #030712;
 }
 
 .btn-gold:hover::after {
@@ -122,11 +127,11 @@ section {
 }
 
 .btn-outline-gold:hover {
-  background: var(--gold);
-  color: #050508;
+  background: linear-gradient(135deg, rgba(6, 182, 212, 0.1) 0%, rgba(99, 102, 241, 0.1) 100%);
+  color: #fff;
   border-color: var(--gold);
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(201, 168, 76, 0.2);
+  box-shadow: 0 8px 25px rgba(6, 182, 212, 0.15);
 }
 
 /* Card Styles */
@@ -160,12 +165,12 @@ section {
 
 .custom-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(201, 168, 76, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 30px rgba(6, 182, 212, 0.2);
   border-color: var(--gold);
 }
 
 .custom-card:hover::after {
-  background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+  background: linear-gradient(135deg, var(--gold), var(--indigo), var(--gold));
   background-size: 200% 200%;
   animation: borderRotate 3s linear infinite;
   opacity: 0.8;
@@ -184,7 +189,7 @@ section {
 
 .custom-card:hover .project-icon {
   transform: scale(1.1) rotate(5deg);
-  filter: drop-shadow(0 0 15px rgba(201, 168, 76, 0.25));
+  filter: drop-shadow(0 0 15px rgba(6, 182, 212, 0.25));
 }
 
 /* Common Section Heading */
@@ -220,9 +225,43 @@ section {
   background-color: var(--bg-secondary);
   color: var(--text-primary);
   border-color: var(--gold);
-  box-shadow: 0 0 0 0.25rem rgba(201, 168, 76, 0.15);
+  box-shadow: 0 0 0 0.25rem rgba(6, 182, 212, 0.15);
 }
 
 .form-control::placeholder {
   color: var(--text-muted);
+}
+
+/* Custom Tabs for Experience */
+.experience-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.experience-tab {
+  background: transparent;
+  border: 1px solid var(--gold-border);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  padding: 10px 24px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.experience-tab.active {
+  background: var(--gold);
+  border-color: var(--gold);
+  color: #030712;
+  box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
+  font-weight: 600;
+}
+
+.experience-tab:hover:not(.active) {
+  border-color: var(--gold);
+  color: var(--text-primary);
+  background: rgba(6, 182, 212, 0.05);
 }

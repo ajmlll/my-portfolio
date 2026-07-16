@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Container, Row, Col, Badge } from 'react-bootstrap';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
@@ -50,97 +50,163 @@ const projectsData = [
 ];
 
 const Projects = () => {
-  const [filter, setFilter] = useState('all');
-
-  const filters = [
-    { label: 'All', value: 'all' },
-    { label: 'Full Stack', value: 'fullstack' },
-    { label: 'Backend', value: 'backend' }
-  ];
-
-  const filteredProjects = filter === 'all' 
-    ? projectsData 
-    : projectsData.filter(p => p.category === filter);
-
   return (
-    <section id="projects" style={{ backgroundColor: 'var(--bg-secondary)' }}>
-      <Container>
-        <Row className="mb-5 reveal text-center text-md-start">
-          <Col md={6}>
+    <section id="projects" style={{ backgroundColor: 'var(--bg-secondary)', position: 'relative' }}>
+      {/* Radial glow background */}
+      <div 
+        style={{
+          position: 'absolute', top: '30%', left: '50%', width: '400px', height: '400px',
+          background: 'radial-gradient(circle, rgba(6, 182, 212, 0.05) 0%, transparent 70%)',
+          borderRadius: '50%', filter: 'blur(60px)', zIndex: 0, pointerEvents: 'none'
+        }}
+      ></div>
+
+      <Container style={{ zIndex: 1, position: 'relative' }}>
+        <Row className="mb-5 reveal">
+          <Col lg={12} className="text-center text-md-start">
             <h2 className="section-title">Selected Works</h2>
-          </Col>
-          <Col md={6} className="d-flex justify-content-md-end align-items-end mt-4 mt-md-0">
-            <div className="d-flex flex-wrap gap-2 justify-content-center">
-              {filters.map(f => (
-                <button
-                  key={f.value}
-                  onClick={() => setFilter(f.value)}
-                  className={`btn ${filter === f.value ? 'btn-gold' : 'btn-outline-gold'} btn-sm`}
-                  style={{ borderRadius: '20px', padding: '5px 15px' }}
-                >
-                  {f.label}
-                </button>
-              ))}
-            </div>
           </Col>
         </Row>
 
         <Row className="g-4">
-          {filteredProjects.map((project, idx) => (
-            <Col lg={4} md={6} key={project.id} className={`reveal delay-${(idx % 3) + 1}`}>
-              <div className="custom-card h-100 d-flex flex-column group" style={{ cursor: 'pointer' }}>
-                
-                {/* Thumbnail Area */}
-                <div 
-                  className="d-flex align-items-center justify-content-center position-relative overflow-hidden"
-                  style={{ height: '200px', background: 'rgba(0,0,0,0.2)', borderBottom: '1px solid var(--gold-border)' }}
-                >
-                  <span className="project-icon" style={{ fontSize: '5rem' }}>
-                    {project.image}
-                  </span>
-                  
-                  {project.featured && (
-                    <Badge bg="gold" style={{ position: 'absolute', top: '15px', right: '15px', backgroundColor: 'var(--gold)', color: '#000', fontSize: '0.7rem', fontWeight: 'bold' }}>
-                      Featured
-                    </Badge>
-                  )}
-
-                  {/* Hover Actions Overlay */}
-                  <div 
-                    className="position-absolute w-100 h-100 d-flex gap-3 align-items-center justify-content-center transition-all bg-overlay"
-                    style={{ 
-                      background: 'rgba(13, 13, 13, 0.4)', backdropFilter: 'blur(4px)',
-                      opacity: 0, transition: 'all 0.4s ease', 
-                    }}
-                  >
-                    <a href={project.github} target="_blank" rel="noreferrer" className="btn btn-outline-gold rounded-circle d-flex align-items-center justify-content-center p-0 action-btn" style={{ width: '45px', height: '45px', transform: 'translateY(20px)', transition: 'all 0.4s ease' }} title="View Source">
-                      <FaGithub size={20} />
-                    </a>
-                    {project.live !== '#' && (
-                      <a href={project.live} target="_blank" rel="noreferrer" className="btn btn-gold rounded-circle d-flex align-items-center justify-content-center p-0 action-btn" style={{ width: '45px', height: '45px', transform: 'translateY(20px)', transition: 'all 0.4s ease 0.1s' }} title="Live Demo">
-                        <FaExternalLinkAlt size={18} />
-                      </a>
-                    )}
+          {projectsData.map((project, idx) => {
+            if (project.id === 1) {
+              // Featured Full-Width Project Card
+              return (
+                <Col lg={12} key={project.id} className="reveal delay-1 mb-4">
+                  <div className="custom-card group h-100" style={{ border: '1px solid rgba(6, 182, 212, 0.25)' }}>
+                    <Row className="g-0 align-items-stretch">
+                      {/* Left: Thumbnail/Visual column */}
+                      <Col md={5} className="d-flex align-items-center justify-content-center position-relative overflow-hidden" style={{ minHeight: '300px', background: 'radial-gradient(circle at 50% 50%, rgba(6, 182, 212, 0.18) 0%, rgba(3, 7, 18, 0.4) 100%)', borderRight: '1px solid var(--gold-border)' }}>
+                        <span className="project-icon" style={{ fontSize: '7rem' }}>
+                          {project.image}
+                        </span>
+                        <Badge bg="dark" className="position-absolute" style={{ top: '20px', left: '20px', border: '1px solid var(--gold)', color: 'var(--gold)', fontWeight: '600' }}>
+                          Featured Project
+                        </Badge>
+                        
+                        {/* Hover Actions Overlay */}
+                        <div 
+                          className="position-absolute w-100 h-100 d-flex gap-3 align-items-center justify-content-center transition-all bg-overlay"
+                          style={{ 
+                            background: 'rgba(13, 13, 18, 0.55)', backdropFilter: 'blur(6px)',
+                            opacity: 0, transition: 'all 0.4s ease', 
+                          }}
+                        >
+                          <a href={project.github} target="_blank" rel="noreferrer" className="btn btn-outline-gold rounded-circle d-flex align-items-center justify-content-center p-0 action-btn" style={{ width: '50px', height: '50px', transform: 'translateY(20px)', transition: 'all 0.4s ease' }} title="View Source">
+                            <FaGithub size={22} />
+                          </a>
+                          {project.live !== '#' && (
+                            <a href={project.live} target="_blank" rel="noreferrer" className="btn btn-gold rounded-circle d-flex align-items-center justify-content-center p-0 action-btn" style={{ width: '50px', height: '50px', transform: 'translateY(20px)', transition: 'all 0.4s ease 0.1s' }} title="Live Demo">
+                              <FaExternalLinkAlt size={20} />
+                            </a>
+                          )}
+                        </div>
+                      </Col>
+                      
+                      {/* Right: Info details column */}
+                      <Col md={7} className="p-4 p-md-5 d-flex flex-column justify-content-between">
+                        <div>
+                          <h3 className="h3 mb-3 text-gold font-monospace" style={{ color: 'var(--gold) !important', letterSpacing: '-0.01em', fontWeight: 800 }}>
+                            {project.title}
+                          </h3>
+                          <p className="text-secondary mb-4" style={{ fontSize: '1.05rem', lineHeight: '1.8' }}>
+                            {project.description}
+                          </p>
+                        </div>
+                        
+                        <div>
+                          <div className="d-flex flex-wrap gap-2 mb-4 pt-3 border-top" style={{ borderColor: 'rgba(255, 255, 255, 0.06) !important' }}>
+                            {project.tech.map((t, i) => (
+                              <span key={i} className="font-monospace text-gold" style={{ fontSize: '0.85rem' }}>
+                                #{t}
+                              </span>
+                            ))}
+                          </div>
+                          
+                          <div className="d-flex gap-3">
+                            <a href={project.github} target="_blank" rel="noreferrer" className="btn-outline-gold d-inline-flex align-items-center gap-2" style={{ padding: '8px 20px', fontSize: '0.9rem' }}>
+                              <FaGithub /> Source Code
+                            </a>
+                            {project.live !== '#' && (
+                              <a href={project.live} target="_blank" rel="noreferrer" className="btn-gold d-inline-flex align-items-center gap-2" style={{ padding: '8px 20px', fontSize: '0.9rem' }}>
+                                <FaExternalLinkAlt /> Live Demo
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      </Col>
+                    </Row>
                   </div>
-                </div>
-
-                {/* Content Area */}
-                <div className="p-4 flex-grow-1 d-flex flex-column">
-                  <h3 className="h5 text-primary mb-3">{project.title}</h3>
-                  <p className="text-muted small flex-grow-1">{project.description}</p>
-                  
-                  <div className="d-flex flex-wrap gap-2 mt-3 pt-3 border-top" style={{ borderColor: 'var(--gold-border) !important' }}>
-                    {project.tech.map((t, i) => (
-                      <span key={i} className="font-monospace text-gold" style={{ fontSize: '0.8rem' }}>
-                        #{t}
+                </Col>
+              );
+            } else {
+              // Standard Columns Below
+              return (
+                <Col lg={4} md={6} key={project.id} className={`reveal delay-${(idx % 3) + 1}`}>
+                  <div className="custom-card h-100 d-flex flex-column group" style={{ cursor: 'pointer', border: '1px solid rgba(99, 102, 241, 0.15)' }}>
+                    
+                    {/* Thumbnail Area */}
+                    <div 
+                      className="d-flex align-items-center justify-content-center position-relative overflow-hidden"
+                      style={{ height: '200px', background: 'radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.12) 0%, rgba(3, 7, 18, 0.4) 100%)', borderBottom: '1px solid var(--gold-border)' }}
+                    >
+                      <span className="project-icon" style={{ fontSize: '4.5rem' }}>
+                        {project.image}
                       </span>
-                    ))}
-                  </div>
-                </div>
+                      
+                      {project.featured && (
+                        <Badge bg="dark" style={{ position: 'absolute', top: '15px', right: '15px', border: '1px solid var(--gold)', color: 'var(--gold)', fontSize: '0.7rem', fontWeight: 'bold' }}>
+                          Featured
+                        </Badge>
+                      )}
 
-              </div>
-            </Col>
-          ))}
+                      {/* Hover Actions Overlay */}
+                      <div 
+                        className="position-absolute w-100 h-100 d-flex gap-3 align-items-center justify-content-center transition-all bg-overlay"
+                        style={{ 
+                          background: 'rgba(13, 13, 18, 0.5)', backdropFilter: 'blur(5px)',
+                          opacity: 0, transition: 'all 0.4s ease', 
+                        }}
+                      >
+                        <a href={project.github} target="_blank" rel="noreferrer" className="btn btn-outline-gold rounded-circle d-flex align-items-center justify-content-center p-0 action-btn" style={{ width: '45px', height: '45px', transform: 'translateY(20px)', transition: 'all 0.4s ease' }} title="View Source">
+                          <FaGithub size={20} />
+                        </a>
+                        {project.live !== '#' && (
+                          <a href={project.live} target="_blank" rel="noreferrer" className="btn btn-gold rounded-circle d-flex align-items-center justify-content-center p-0 action-btn" style={{ width: '45px', height: '45px', transform: 'translateY(20px)', transition: 'all 0.4s ease 0.1s' }} title="Live Demo">
+                            <FaExternalLinkAlt size={18} />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Content Area */}
+                    <div className="p-4 flex-grow-1 d-flex flex-column justify-content-between">
+                      <div>
+                        <h3 className="h5 text-primary mb-3 font-monospace" style={{ transition: 'color 0.3s ease', letterSpacing: '-0.01em', fontWeight: 700 }}>
+                          {project.title}
+                        </h3>
+                        <p className="text-secondary small" style={{ lineHeight: '1.6' }}>
+                          {project.description}
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <div className="d-flex flex-wrap gap-2 mt-3 pt-3 border-top" style={{ borderColor: 'rgba(255, 255, 255, 0.05) !important' }}>
+                          {project.tech.map((t, i) => (
+                            <span key={i} className="font-monospace text-gold" style={{ fontSize: '0.8rem' }}>
+                              #{t}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                </Col>
+              );
+            }
+          })}
         </Row>
       </Container>
       <style>{`
@@ -155,7 +221,7 @@ const Projects = () => {
         }
         .action-btn:hover {
           transform: scale(1.1) !important;
-          box-shadow: 0 0 15px var(--gold-dim);
+          box-shadow: 0 0 15px rgba(6, 182, 212, 0.3);
         }
       `}</style>
     </section>

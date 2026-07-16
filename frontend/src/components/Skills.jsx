@@ -64,47 +64,49 @@ const Skills = () => {
           </Col>
         </Row>
         
-        <Row className="g-5">
-          {/* Categories Column */}
-          <Col lg={7} className="reveal delay-1">
-            <div className="d-flex flex-column gap-4">
-              {skillCategories.map((cat, idx) => (
-                <div key={idx} className="custom-card p-4">
-                  <h3 className="h5 text-gold mb-3 font-monospace" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--gold)' }}></span>
-                    {cat.title}
-                  </h3>
-                  <div className="d-flex flex-wrap gap-3">
-                    {cat.skills.map((skill, sIdx) => (
-                      <div 
-                        key={sIdx} 
-                        className="d-flex align-items-center gap-2 px-3 py-2 rounded"
-                        style={{ backgroundColor: 'rgba(255, 255, 255, 0.03)', border: '1px solid var(--gold-border)' }}
-                      >
-                        <span style={{ fontSize: '1.2rem', display: 'flex', alignItems: 'center' }}>
-                          {skill.icon}
-                        </span>
-                        <span className="text-secondary font-monospace small" style={{ fontWeight: 500 }}>
-                          {skill.name}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
+        {/* Categories Row */}
+        <Row className="g-4 mb-5">
+          {skillCategories.map((cat, idx) => (
+            <Col lg={4} md={6} key={idx} className={`reveal delay-${idx + 1}`}>
+              <div className="custom-card p-4 h-100" style={{ border: '1px solid rgba(99, 102, 241, 0.15)' }}>
+                <h3 className="h5 text-gold mb-3 font-monospace" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <span style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', backgroundColor: 'var(--gold)' }}></span>
+                  {cat.title}
+                </h3>
+                <div className="d-flex flex-wrap gap-2">
+                  {cat.skills.map((skill, sIdx) => (
+                    <div 
+                      key={sIdx} 
+                      className="d-flex align-items-center gap-2 px-3 py-2 rounded"
+                      style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--gold-border)' }}
+                    >
+                      <span style={{ fontSize: '1.2rem', display: 'flex', alignItems: 'center' }}>
+                        {skill.icon}
+                      </span>
+                      <span className="text-secondary font-monospace small" style={{ fontWeight: 500 }}>
+                        {skill.name}
+                      </span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </Col>
-
-          {/* Progress Bars */}
-          <Col lg={5} className="reveal delay-2 ps-lg-5 d-flex flex-column justify-content-between">
-            <div>
-              <h3 className="h4 mb-4 text-gold font-monospace">Proficiency</h3>
-              <div className="d-flex flex-column gap-4">
-                {progressBars.map((bar, idx) => (
-                  <ProgressBar key={idx} name={bar.name} value={bar.value} delay={idx * 100} />
-                ))}
               </div>
-            </div>
+            </Col>
+          ))}
+        </Row>
+
+        {/* Progress Bars Row */}
+        <Row className="reveal delay-2 mt-5">
+          <Col lg={12}>
+            <h3 className="h4 mb-4 text-gold font-monospace text-center">Core Proficiencies</h3>
+          </Col>
+          <Col lg={10} className="mx-auto">
+            <Row className="g-4">
+              {progressBars.map((bar, idx) => (
+                <Col md={6} key={idx}>
+                  <ProgressBar name={bar.name} value={bar.value} delay={idx * 100} />
+                </Col>
+              ))}
+            </Row>
           </Col>
         </Row>
       </Container>

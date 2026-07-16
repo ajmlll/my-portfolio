@@ -16,37 +16,8 @@ const About = () => {
           </Col>
         </Row>
         <Row className="align-items-center">
-          <Col lg={5} className="mb-5 mb-lg-0 reveal delay-1 d-flex justify-content-center">
-            <div style={{ position: 'relative', width: '100%', maxWidth: '350px', marginRight: '20px' }}>
-              {/* Offset Border */}
-              <div style={{
-                position: 'absolute',
-                top: '25px',
-                left: '25px',
-                width: '100%',
-                height: '100%',
-                border: '3px solid var(--gold)',
-                borderRadius: '8px',
-                zIndex: 0
-              }}></div>
-              
-              {/* Actual Image */}
-              <img 
-                src="/profile.jpeg" 
-                alt="Muhammed Ajmal" 
-                style={{
-                  width: '100%',
-                  aspectRatio: '4/5',
-                  objectFit: 'cover',
-                  borderRadius: '8px',
-                  position: 'relative',
-                  zIndex: 1,
-                  boxShadow: '0 15px 35px rgba(0,0,0,0.5)'
-                }}
-              />
-            </div>
-          </Col>
-          <Col lg={7} className="reveal delay-2 ps-lg-5">
+          {/* Text Content Column */}
+          <Col lg={7} className="reveal delay-1 mb-5 mb-lg-0 pe-lg-5">
             <h3 className="h2 mb-4" style={{ color: 'var(--text-primary)' }}>Designing and Deploying Production-Ready Apps.</h3>
             <p className="text-muted mb-4" style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
               I am a results-driven MERN Stack Developer with hands-on, production-level experience building and deploying live web applications. I have successfully delivered a live e-commerce platform handling 200+ daily transactions and a full-stack classified marketplace—both production-deployed on AWS.
@@ -70,6 +41,52 @@ const About = () => {
             <a href="/resume.pdf" download="Muhammed_Ajmal_Resume.pdf" className="btn-gold text-decoration-none d-inline-block">
               Download Resume
             </a>
+          </Col>
+
+          {/* Profile Image Column */}
+          <Col lg={5} className="reveal delay-2 d-flex justify-content-center">
+            <div style={{ position: 'relative', width: '100%', maxWidth: '350px' }}>
+              {/* Glow Effect behind Image */}
+              <div style={{
+                position: 'absolute',
+                top: '-10%',
+                left: '-10%',
+                width: '120%',
+                height: '120%',
+                background: 'radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 60%)',
+                zIndex: 0,
+                pointerEvents: 'none'
+              }}></div>
+
+              {/* Offset Border */}
+              <div style={{
+                position: 'absolute',
+                top: '20px',
+                left: '20px',
+                width: '100%',
+                height: '100%',
+                border: '2px solid var(--gold)',
+                borderRadius: '12px',
+                zIndex: 0,
+                boxShadow: '0 0 20px rgba(6, 182, 212, 0.15)'
+              }}></div>
+              
+              {/* Actual Image */}
+              <img 
+                src="/profile.jpeg" 
+                alt="Muhammed Ajmal" 
+                style={{
+                  width: '100%',
+                  aspectRatio: '4/5',
+                  objectFit: 'cover',
+                  borderRadius: '12px',
+                  position: 'relative',
+                  zIndex: 1,
+                  boxShadow: '0 15px 35px rgba(0,0,0,0.6)',
+                  border: '1px solid rgba(255,255,255,0.08)'
+                }}
+              />
+            </div>
           </Col>
         </Row>
       </Container>

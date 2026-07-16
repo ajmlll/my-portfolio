@@ -1,20 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 const Experience = () => {
+  const [activeTab, setActiveTab] = useState('work');
+
   const work = [
     {
       period: "May 2025 - Present",
       role: "MERN Stack Developer Intern",
       company: "Catalyst Tech Hub - Kerala, India",
-      description: "Working in a full-time engineering environment. Building and shipping full-stack features, reusable UI components, backend endpoints, and database schemas. Collaborating in Agile/Scrum workflows using Git/GitHub, and applying JWT authentication, role-based access control, and clean architecture.",
+      description: "Working in a full-time engineering environment simulating real workflows. Building and shipping full-stack features, reusable UI components, backend endpoints, and database schemas. Collaborating in Agile/Scrum using Git/GitHub, and applying JWT authentication, role-based access control, and clean architecture.",
       skills: ["React.js", "Redux Toolkit", "Node.js", "Express.js", "TypeScript", "MongoDB", "PostgreSQL", "Git"]
     },
     {
       period: "May 2026 - Jun 2026",
       role: "Junior Developer Intern",
       company: "Expectation Walkers - Remote",
-      description: "Developed and integrated 2 RESTful APIs with frontend components for AI-powered features. Collaborated on user-friendly interfaces following responsive and cross-platform standards, debugged 5 critical production integration issues, and participated in Git code reviews.",
+      description: "Developed and integrated 2 RESTful APIs with frontend components for AI-powered content generation. Collaborated on user-friendly interfaces following responsive and cross-platform standards, debugged 5 critical production integration issues, and participated in Git code reviews.",
       skills: ["Node.js", "Express.js", "React.js", "REST API", "Git", "Async Programming"]
     }
   ];
@@ -39,27 +41,36 @@ const Experience = () => {
   return (
     <section id="experience">
       <Container>
-        <Row className="mb-5 reveal">
+        <Row className="mb-5 reveal text-center">
           <Col>
             <h2 className="section-title">Journey</h2>
           </Col>
         </Row>
 
-        <Row className="g-5">
-          <Col lg={6} className="reveal delay-1">
-            <h3 className="h4 mb-4 text-gold" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ display: 'inline-block', width: '30px', height: '2px', backgroundColor: 'var(--gold)' }}></span>
-              Work Experience
-            </h3>
-            <Timeline items={work} />
+        {/* Tab Controls */}
+        <Row className="reveal delay-1">
+          <Col lg={8} className="mx-auto">
+            <div className="experience-tabs">
+              <button 
+                onClick={() => setActiveTab('work')} 
+                className={`experience-tab ${activeTab === 'work' ? 'active' : ''}`}
+              >
+                Work Experience
+              </button>
+              <button 
+                onClick={() => setActiveTab('education')} 
+                className={`experience-tab ${activeTab === 'education' ? 'active' : ''}`}
+              >
+                Education & Certs
+              </button>
+            </div>
           </Col>
+        </Row>
 
-          <Col lg={6} className="reveal delay-2">
-            <h3 className="h4 mb-4 text-gold" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-              <span style={{ display: 'inline-block', width: '30px', height: '2px', backgroundColor: 'var(--gold)' }}></span>
-              Education & Certs
-            </h3>
-            <Timeline items={education} />
+        {/* Timeline Content */}
+        <Row className="reveal delay-2">
+          <Col lg={8} className="mx-auto">
+            <Timeline items={activeTab === 'work' ? work : education} />
           </Col>
         </Row>
       </Container>
@@ -86,7 +97,7 @@ const Timeline = ({ items }) => (
           }}
         ></div>
 
-        <div className="custom-card p-4">
+        <div className="custom-card p-4" style={{ border: '1px solid rgba(99, 102, 241, 0.15)' }}>
           <span className="font-monospace small text-gold mb-2 d-block">{item.period}</span>
           <h4 className="text-primary mb-1">{item.role}</h4>
           <h5 className="h6 text-dim mb-3">{item.company}</h5>
