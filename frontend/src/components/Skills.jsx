@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { 
   FaReact, FaNodeJs, FaAws, FaGitAlt 
@@ -13,35 +13,35 @@ const Skills = () => {
     {
       title: "Languages & Frontend",
       skills: [
-        { name: 'JavaScript', icon: <SiJavascript color="#F7DF1E" /> },
-        { name: 'TypeScript', icon: <SiTypescript color="#3178C6" /> },
-        { name: 'React.js', icon: <FaReact color="#61DAFB" /> },
-        { name: 'Next.js', icon: <SiNextdotjs color="#FFFFFF" /> },
-        { name: 'Redux Toolkit', icon: <SiRedux color="#764ABC" /> },
-        { name: 'Tailwind CSS', icon: <SiTailwindcss color="#06B6D4" /> },
-        { name: 'Bootstrap', icon: <SiBootstrap color="#7952B3" /> },
-        { name: 'Material UI', icon: <SiMui color="#007FFF" /> }
+        { name: 'JavaScript', icon: <SiJavascript color="#F7DF1E" />, color: '#F7DF1E', glow: 'rgba(247, 223, 30, 0.2)' },
+        { name: 'TypeScript', icon: <SiTypescript color="#3178C6" />, color: '#3178C6', glow: 'rgba(49, 120, 198, 0.2)' },
+        { name: 'React.js', icon: <FaReact color="#61DAFB" />, color: '#61DAFB', glow: 'rgba(97, 218, 251, 0.2)' },
+        { name: 'Next.js', icon: <SiNextdotjs color="#FFFFFF" />, color: '#FFFFFF', glow: 'rgba(255, 255, 255, 0.2)' },
+        { name: 'Redux Toolkit', icon: <SiRedux color="#764ABC" />, color: '#764ABC', glow: 'rgba(118, 74, 188, 0.2)' },
+        { name: 'Tailwind CSS', icon: <SiTailwindcss color="#06B6D4" />, color: '#06B6D4', glow: 'rgba(6, 182, 212, 0.2)' },
+        { name: 'Bootstrap', icon: <SiBootstrap color="#7952B3" />, color: '#7952B3', glow: 'rgba(121, 82, 179, 0.2)' },
+        { name: 'Material UI', icon: <SiMui color="#007FFF" />, color: '#007FFF', glow: 'rgba(0, 127, 255, 0.2)' }
       ]
     },
     {
       title: "Backend & Databases",
       skills: [
-        { name: 'Node.js', icon: <FaNodeJs color="#339933" /> },
-        { name: 'Express.js', icon: <SiExpress color="#FFFFFF" /> },
-        { name: 'MongoDB', icon: <SiMongodb color="#47A248" /> },
-        { name: 'PostgreSQL', icon: <SiPostgresql color="#4169E1" /> },
-        { name: 'MySQL', icon: <SiMysql color="#4479A1" /> },
-        { name: 'Redis', icon: <SiRedis color="#DC382D" /> }
+        { name: 'Node.js', icon: <FaNodeJs color="#339933" />, color: '#339933', glow: 'rgba(51, 153, 51, 0.2)' },
+        { name: 'Express.js', icon: <SiExpress color="#FFFFFF" />, color: '#FFFFFF', glow: 'rgba(255, 255, 255, 0.15)' },
+        { name: 'MongoDB', icon: <SiMongodb color="#47A248" />, color: '#47A248', glow: 'rgba(71, 162, 72, 0.2)' },
+        { name: 'PostgreSQL', icon: <SiPostgresql color="#4169E1" />, color: '#4169E1', glow: 'rgba(65, 105, 225, 0.2)' },
+        { name: 'MySQL', icon: <SiMysql color="#4479A1" />, color: '#4479A1', glow: 'rgba(68, 121, 161, 0.2)' },
+        { name: 'Redis', icon: <SiRedis color="#DC382D" />, color: '#DC382D', glow: 'rgba(220, 56, 45, 0.2)' }
       ]
     },
     {
       title: "DevOps & Tools",
       skills: [
-        { name: 'AWS', icon: <FaAws color="#FF9900" /> },
-        { name: 'NGINX', icon: <SiNginx color="#009639" /> },
-        { name: 'Git & GitHub', icon: <FaGitAlt color="#F05032" /> },
-        { name: 'Postman', icon: <SiPostman color="#FF6C37" /> },
-        { name: 'Figma', icon: <SiFigma color="#F24E1E" /> }
+        { name: 'AWS', icon: <FaAws color="#FF9900" />, color: '#FF9900', glow: 'rgba(255, 153, 0, 0.2)' },
+        { name: 'NGINX', icon: <SiNginx color="#009639" />, color: '#009639', glow: 'rgba(0, 150, 57, 0.2)' },
+        { name: 'Git & GitHub', icon: <FaGitAlt color="#F05032" />, color: '#F05032', glow: 'rgba(240, 80, 50, 0.2)' },
+        { name: 'Postman', icon: <SiPostman color="#FF6C37" />, color: '#FF6C37', glow: 'rgba(255, 108, 55, 0.2)' },
+        { name: 'Figma', icon: <SiFigma color="#F24E1E" />, color: '#F24E1E', glow: 'rgba(242, 78, 30, 0.2)' }
       ]
     }
   ];
@@ -75,18 +75,7 @@ const Skills = () => {
                 </h3>
                 <div className="d-flex flex-wrap gap-2">
                   {cat.skills.map((skill, sIdx) => (
-                    <div 
-                      key={sIdx} 
-                      className="d-flex align-items-center gap-2 px-3 py-2 rounded"
-                      style={{ backgroundColor: 'rgba(255, 255, 255, 0.02)', border: '1px solid var(--gold-border)' }}
-                    >
-                      <span style={{ fontSize: '1.2rem', display: 'flex', alignItems: 'center' }}>
-                        {skill.icon}
-                      </span>
-                      <span className="text-secondary font-monospace small" style={{ fontWeight: 500 }}>
-                        {skill.name}
-                      </span>
-                    </div>
+                    <SkillBadge key={sIdx} skill={skill} />
                   ))}
                 </div>
               </div>
@@ -111,6 +100,41 @@ const Skills = () => {
         </Row>
       </Container>
     </section>
+  );
+};
+
+const SkillBadge = ({ skill }) => {
+  const [hovered, setHovered] = useState(false);
+  const borderStyle = hovered 
+    ? `1px solid ${skill.color}` 
+    : '1px solid var(--gold-border)';
+  const shadowStyle = hovered 
+    ? `0 0 15px ${skill.glow}` 
+    : 'none';
+  const bgStyle = hovered 
+    ? 'rgba(255, 255, 255, 0.05)' 
+    : 'rgba(255, 255, 255, 0.02)';
+
+  return (
+    <div 
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="d-flex align-items-center gap-2 px-3 py-2 rounded"
+      style={{ 
+        backgroundColor: bgStyle, 
+        border: borderStyle,
+        boxShadow: shadowStyle,
+        transition: 'all 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+        cursor: 'default'
+      }}
+    >
+      <span style={{ fontSize: '1.2rem', display: 'flex', alignItems: 'center', transform: hovered ? 'scale(1.1) rotate(5deg)' : 'none', transition: 'transform 0.3s ease' }}>
+        {skill.icon}
+      </span>
+      <span className="text-secondary font-monospace small" style={{ fontWeight: 500, color: hovered ? 'var(--text-primary)' : 'var(--text-secondary)', transition: 'color 0.3s ease' }}>
+        {skill.name}
+      </span>
+    </div>
   );
 };
 
