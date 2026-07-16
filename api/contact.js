@@ -99,8 +99,9 @@ module.exports = async (req, res) => {
 
     // Validate environment variables
     if (!process.env.EMAIL_FROM || !process.env.EMAIL_PASS || !process.env.EMAIL_TO) {
-      console.error('Missing configuration: EMAIL_FROM, EMAIL_PASS, or EMAIL_TO');
-      return res.status(500).json({ message: 'Mail server configuration missing.' });
+      console.warn(`[Contact Received - MAIL CONFIG MISSING] From ${name} (${email}): ${subject}`);
+      console.log(`Message: ${message}`);
+      return res.status(200).json({ message: 'Message received successfully (Mail config missing).' });
     }
 
     const transporter = nodemailer.createTransport({
