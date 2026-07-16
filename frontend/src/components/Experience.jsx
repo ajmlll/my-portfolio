@@ -4,11 +4,18 @@ import { Container, Row, Col } from 'react-bootstrap';
 const Experience = () => {
   const work = [
     {
-      period: "Aug 2023 - Present",
+      period: "May 2025 - Present",
       role: "MERN Stack Developer Intern",
       company: "Catalyst Tech Hub - Kerala, India",
-      description: "Building production-ready applications. Shipping full-stack features including reusable UI components, backend API endpoints, and database schemas while optimizing performance via Agile methodologies.",
-      skills: ["React.js", "Node.js", "TypeScript", "Express.js", "MongoDB", "PostgreSQL"]
+      description: "Working in a full-time engineering environment. Building and shipping full-stack features, reusable UI components, backend endpoints, and database schemas. Collaborating in Agile/Scrum workflows using Git/GitHub, and applying JWT authentication, role-based access control, and clean architecture.",
+      skills: ["React.js", "Redux Toolkit", "Node.js", "Express.js", "TypeScript", "MongoDB", "PostgreSQL", "Git"]
+    },
+    {
+      period: "May 2026 - Jun 2026",
+      role: "Junior Developer Intern",
+      company: "Expectation Walkers - Remote",
+      description: "Developed and integrated 2 RESTful APIs with frontend components for AI-powered features. Collaborated on user-friendly interfaces following responsive and cross-platform standards, debugged 5 critical production integration issues, and participated in Git code reviews.",
+      skills: ["Node.js", "Express.js", "React.js", "REST API", "Git", "Async Programming"]
     }
   ];
 
@@ -16,15 +23,15 @@ const Experience = () => {
     {
       period: "2022 - 2025",
       role: "Bachelor of Computer Science",
-      company: "University of Calicut, Kerala",
+      company: "University of Calicut - Kerala, India",
       description: "Undergraduate degree focusing on core computer science foundations, algorithms, and software engineering principles.",
       skills: ["Computer Science", "Software Engineering"]
     },
     {
-      period: "Present",
+      period: "2025",
       role: "Certifications in Full Stack Development",
       company: "Future By Catalyst",
-      description: "MERN Stack Development certification and professional internship experience covering enterprise-level development.",
+      description: "MERN Stack Development certification and professional training covering enterprise-level development.",
       skills: ["React.js", "Node.js", "MongoDB", "Express.js"]
     }
   ];

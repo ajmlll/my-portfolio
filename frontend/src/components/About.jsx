@@ -49,10 +49,10 @@ const About = () => {
           <Col lg={7} className="reveal delay-2 ps-lg-5">
             <h3 className="h2 mb-4" style={{ color: 'var(--text-primary)' }}>Designing and Deploying Production-Ready Apps.</h3>
             <p className="text-muted mb-4" style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-              I am a results-driven Full Stack Developer with hands-on expertise in designing and deploying production-ready web applications. My proven ability allows me to architect scalable MERN solutions, develop RESTful APIs, implement secure authentication systems, and optimize database performance.
+              I am a results-driven MERN Stack Developer with hands-on, production-level experience building and deploying live web applications. I have successfully delivered a live e-commerce platform handling 200+ daily transactions and a full-stack classified marketplace—both production-deployed on AWS.
             </p>
             <p className="text-muted mb-4" style={{ fontSize: '1.1rem', lineHeight: '1.8' }}>
-              I have a strong background in building full-stack features from concept to deployment, with demonstrated proficiency in modern frontend frameworks like React.js and Redux Toolkit, and robust backend systems using Node.js and Express.js. I thrive in collaborative Agile environments where I focus on delivering clean code architecture, maintaining best practices, and driving measurable business impact.
+              My focus is on writing clean, efficient, and scalable code across both frontend and backend. I have a strong background in developing robust RESTful APIs, managing and micro-optimizing MongoDB databases, and building user-friendly responsive interfaces. I thrive in Agile environments where I can collaborate with teams to turn complex ideas into refined, high-performance products.
             </p>
             
             <div className="d-flex flex-wrap gap-2 mb-5">

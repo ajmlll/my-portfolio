@@ -5,36 +5,47 @@ import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 const projectsData = [
   {
     id: 1,
-    title: 'OLX-Style Marketplace Platform',
-    description: 'A full-stack classified marketplace platform featuring dynamic product listings, advanced search filters, and a seamless user experience. Optimized for performance with a 65% reduction in initial page load time.',
-    image: '🛍️',
+    title: 'Enterprise Student Admission Management System',
+    description: 'A robust, full-stack monorepo platform governing student enrollment through an automated state-machine pipeline. Features secure parent & admin portals, real-time multi-seat entrance exam scheduling with concurrency protection, an integrated billing system, and classroom placement tools. Built with a clean, modular architecture and strict database state-guards.',
+    image: '🎓',
     category: 'fullstack',
-    tech: ['React.js', 'Node.js', 'MongoDB', 'Cloudinary', 'JWT'],
-    github: 'https://github.com/ajmlll/Olxclone',
-    live: '#',
+    tech: ['Next.js', 'NestJS', 'MongoDB', 'TypeScript', 'TailwindCSS', 'REST API', 'JWT', 'State-Machine'],
+    github: 'https://github.com/ajmlll/Student-Admission',
+    live: 'https://student-admission-management.vercel.app/',
     featured: true
   },
   {
     id: 2,
-    title: 'Full-Stack E-Commerce Solution',
-    description: 'A production-ready e-commerce platform integrated with a powerful Admin Dashboard. Features real-time inventory management, sales analytics, secure Razorpay payments, and automated order tracking.',
+    title: 'E-Commerce Platform with Admin & Vendor Dashboard',
+    description: 'A production-ready MERN stack web application handling real-time order and transaction processing — production-hosted on AWS with reliable, consistent uptime. Built 30+ RESTful APIs, optimized MongoDB queries to reduce load time by 75%, and integrated Razorpay payment gateway API achieving 99.8% transaction success rate.',
     image: '🛒',
     category: 'fullstack',
-    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST API', 'Razorpay', 'JWT'],
+    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Razorpay', 'AWS', 'NGINX', 'Redis', 'JWT'],
     github: 'https://github.com/ajmlll/kickslab-ecommerce',
     live: 'https://kickslabshoes.online',
     featured: true
   },
   {
     id: 3,
-    title: 'Personal Portfolio Website',
-    description: 'A premium, high-performance portfolio designed with a focus on modern aesthetics and smooth user interactions. Built with a full MERN stack to handle contact queries and dynamic content delivery.',
-    image: '💻',
+    title: 'OLX-Style Classified Marketplace Platform',
+    description: 'A scalable, responsive full-stack web application supporting 500+ dynamic listings with advanced filtering and database-driven architecture. Optimized MongoDB queries using pagination to reduce page load by 65% for 10,000+ items, and integrated Cloudinary API reducing storage costs by 80%.',
+    image: '🛍️',
     category: 'fullstack',
-    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'REST API'],
-    github: 'https://github.com/ajmlll/my-portfolio',
-    live: 'https://muhammedajmal-portfolio.vercel.app/',
+    tech: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Cloudinary', 'Tailwind CSS', 'JWT'],
+    github: 'https://github.com/ajmlll/Olxclone',
+    live: '#',
     featured: true
+  },
+  {
+    id: 4,
+    title: 'AI-Powered Career Guidance Platform',
+    description: 'An AI-powered guidance platform (In Development). Architected the complete backend layer with Node.js, Express, and MongoDB supporting 10+ RESTful endpoints. Integrated third-party AI APIs, role-based access control, secure auth flows, and real-time client-backend data sync.',
+    image: '🤖',
+    category: 'backend',
+    tech: ['Node.js', 'Express.js', 'MongoDB', 'React Native', 'AI Integration', 'JWT'],
+    github: 'https://github.com/ajmlll',
+    live: '#',
+    featured: false
   }
 ];
 

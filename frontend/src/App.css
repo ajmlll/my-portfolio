@@ -1,18 +1,18 @@
 :root {
-  --bg-primary: #0d0d0d;
-  --bg-secondary: #141414;
-  --bg-card: #1a1a1a;
+  --bg-primary: #050508;
+  --bg-secondary: #0b0b10;
+  --bg-card: rgba(18, 18, 26, 0.5);
   --gold: #c9a84c;
-  --gold-light: #e2c97e;
-  --gold-dim: rgba(201, 168, 76, 0.15);
-  --gold-border: rgba(201, 168, 76, 0.3);
-  --text-primary: #f0ece3;
-  --text-secondary: #c0b8a4;
-  --text-muted: #c9a84c;
+  --gold-light: #f3e5ab;
+  --gold-dim: rgba(201, 168, 76, 0.12);
+  --gold-border: rgba(201, 168, 76, 0.18);
+  --text-primary: #f8f6f0;
+  --text-secondary: #c0bca9;
+  --text-muted: #8c887a;
   
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'DM Sans', sans-serif;
-  --font-mono: 'DM Mono', monospace;
+  --font-heading: 'Syne', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
 }
 
 body {
@@ -20,6 +20,9 @@ body {
   color: var(--text-primary);
   font-family: var(--font-body);
   overflow-x: hidden;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(201, 168, 76, 0.04) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(201, 168, 76, 0.04) 0%, transparent 40%);
 }
 
 /* Override Bootstrap Colors */
@@ -36,6 +39,8 @@ body {
 h1, h2, h3, h4, h5, h6, .brand-logo {
   font-family: var(--font-heading);
   color: var(--text-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
 }
 
 .text-gold {
@@ -54,8 +59,8 @@ section {
 /* Scroll Animations */
 .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .reveal.visible {
@@ -71,15 +76,16 @@ section {
 /* Global Buttons */
 .btn-gold {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
-  color: var(--bg-primary);
+  color: #050508;
   border: none;
-  font-weight: 500;
-  padding: 10px 24px;
+  font-weight: 600;
+  padding: 12px 28px;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
   z-index: 1;
+  font-family: var(--font-body);
 }
 
 .btn-gold::after {
@@ -89,15 +95,15 @@ section {
   left: -100%;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  transition: left 0.5s ease;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
   z-index: -1;
 }
 
 .btn-gold:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px var(--gold-dim);
-  color: var(--bg-primary);
+  box-shadow: 0 8px 20px rgba(201, 168, 76, 0.25);
+  color: #050508;
 }
 
 .btn-gold:hover::after {
@@ -107,31 +113,33 @@ section {
 .btn-outline-gold {
   background: transparent;
   color: var(--gold);
-  border: 1px solid var(--gold);
-  font-weight: 500;
-  padding: 10px 24px;
+  border: 1px solid var(--gold-border);
+  font-weight: 600;
+  padding: 12px 28px;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-family: var(--font-body);
 }
 
 .btn-outline-gold:hover {
   background: var(--gold);
-  color: var(--bg-primary);
+  color: #050508;
+  border-color: var(--gold);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px var(--gold-dim);
+  box-shadow: 0 8px 20px rgba(201, 168, 76, 0.2);
 }
 
 /* Card Styles */
 .custom-card {
-  background: rgba(26, 26, 26, 0.6);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--gold-border);
   border-radius: 16px;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
 }
 
 .custom-card::after {
@@ -146,13 +154,13 @@ section {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   transition: all 0.5s ease;
-  opacity: 0.5;
+  opacity: 0.3;
   pointer-events: none;
 }
 
 .custom-card:hover {
-  transform: translateY(-12px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px var(--gold-dim);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(201, 168, 76, 0.15);
   border-color: var(--gold);
 }
 
@@ -160,7 +168,7 @@ section {
   background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
   background-size: 200% 200%;
   animation: borderRotate 3s linear infinite;
-  opacity: 1;
+  opacity: 0.8;
 }
 
 @keyframes borderRotate {
@@ -170,21 +178,22 @@ section {
 }
 
 .custom-card .project-icon {
-  transition: all 0.5s ease;
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
 }
 
 .custom-card:hover .project-icon {
   transform: scale(1.1) rotate(5deg);
-  filter: drop-shadow(0 0 15px var(--gold-dim));
+  filter: drop-shadow(0 0 15px rgba(201, 168, 76, 0.25));
 }
 
 /* Common Section Heading */
 .section-title {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   margin-bottom: 20px;
   position: relative;
   display: inline-block;
+  font-weight: 800;
 }
 
 .section-title::after {
@@ -193,22 +202,25 @@ section {
   bottom: -10px;
   left: 0;
   width: 60px;
-  height: 3px;
+  height: 4px;
   background-color: var(--gold);
+  border-radius: 2px;
 }
 
 /* Form inputs overrides */
 .form-control {
   background-color: var(--bg-secondary);
-  border: 1px solid var(--text-muted);
+  border: 1px solid var(--gold-border);
   color: var(--text-primary);
+  border-radius: 8px;
+  font-family: var(--font-body);
 }
 
 .form-control:focus {
   background-color: var(--bg-secondary);
   color: var(--text-primary);
   border-color: var(--gold);
-  box-shadow: 0 0 0 0.25rem var(--gold-dim);
+  box-shadow: 0 0 0 0.25rem rgba(201, 168, 76, 0.15);
 }
 
 .form-control::placeholder {

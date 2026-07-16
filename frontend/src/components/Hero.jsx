@@ -30,10 +30,9 @@ const Hero = () => {
             <h1 className="display-4 fw-bold mb-3" style={{ background: 'linear-gradient(45deg, #f0ece3, #9a9589)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
               Muhammed Ajmal PM
             </h1>
-            <h2 className="h3 text-dim mb-4 mb-lg-5 fw-light">Full Stack Developer</h2>
+            <h2 className="h3 text-dim mb-4 mb-lg-5 fw-light">MERN Stack Developer</h2>
             <p className="lead mb-5 text-muted" style={{ maxWidth: '600px' }}>
-              I craft robust, scalable, and visually stunning web applications. 
-              Designing and deploying production-ready MERN stack solutions with a focus on clean code architecture and best practices.
+              Passionate MERN Stack Developer with hands-on, production-level experience building and deploying live web applications. Skilled in engineering scalable REST APIs, micro-optimizing databases, and writing clean, modern full-stack code.
             </p>
             
             <div className="d-flex flex-wrap gap-3 mb-5">
@@ -47,8 +46,8 @@ const Hero = () => {
 
             <div className="d-flex gap-4 d-none d-md-flex text-muted font-monospace small">
               <div><span className="text-gold fs-4 fw-bold d-block">1+</span>Years Exp.</div>
-              <div><span className="text-gold fs-4 fw-bold d-block">25+</span>APIs Built</div>
-              <div><span className="text-gold fs-4 fw-bold d-block">MERN</span>Stack Pro</div>
+              <div><span className="text-gold fs-4 fw-bold d-block">50+</span>APIs Built</div>
+              <div><span className="text-gold fs-4 fw-bold d-block">MERN</span>& Next.js</div>
             </div>
           </Col>
 
@@ -94,9 +93,9 @@ const AppWindow = () => (
     <div style={{ color: '#d4d4d4' }}>
       <span style={{ color: '#569cd6' }}>const</span> dev = {'{'} <br/>
       &nbsp;&nbsp;name: <span style={{ color: '#ce9178' }}>'Muhammed Ajmal PM'</span>,<br/>
-      &nbsp;&nbsp;role: <span style={{ color: '#ce9178' }}>'Full Stack Developer'</span>,<br/>
+      &nbsp;&nbsp;role: <span style={{ color: '#ce9178' }}>'MERN Stack Developer'</span>,<br/>
       &nbsp;&nbsp;location: <span style={{ color: '#ce9178' }}>'Calicut, Kerala'</span>,<br/>
-      &nbsp;&nbsp;skills: [<span style={{ color: '#ce9178' }}>'React'</span>, <span style={{ color: '#ce9178' }}>'Node.js'</span>, <span style={{ color: '#ce9178' }}>'MongoDB'</span>],<br/>
+      &nbsp;&nbsp;skills: [<span style={{ color: '#ce9178' }}>'React'</span>, <span style={{ color: '#ce9178' }}>'Node.js'</span>, <span style={{ color: '#ce9178' }}>'MongoDB'</span>, <span style={{ color: '#ce9178' }}>'Next.js'</span>, <span style={{ color: '#ce9178' }}>'TypeScript'</span>],<br/>
       &nbsp;&nbsp;passion: <span style={{ color: '#ce9178' }}>'Building awesome products'</span><br/>
       {'}'};<br/><br/>
       dev.<span style={{ color: '#dcdcaa' }}>hire</span>();
