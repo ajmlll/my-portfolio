@@ -5,7 +5,11 @@ const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
 require('dotenv').config();
 
+const connectDB = require('./config/db');
 const contactRouter = require('./routes/contact');
+
+// Connect to Database
+connectDB();
 
 const app = express();
 const PORT = process.env.PORT || 5000;

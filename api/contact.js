@@ -1,5 +1,21 @@
 const nodemailer = require('nodemailer');
 const { check, validationResult } = require('express-validator');
+const mongoose = require('mongoose');
+const Message = require('../backend/models/Message');
+
+// Cached MongoDB Connection for Serverless
+let cachedConn = null;
+
+const connectDB = async () => {
+  if (cachedConn && mongoose.connection.readyState >= 1) {
+    return cachedConn;
+  }
+  if (!process.env.MONGODB_URI) {
+    throw new Error('MONGODB_URI environment variable is not defined');
+  }
+  cachedConn = await mongoose.connect(process.env.MONGODB_URI);
+  return cachedConn;
+};
 
 // Simple in-memory rate limiting for serverless
 const rateLimitMap = new Map();
@@ -97,11 +113,22 @@ module.exports = async (req, res) => {
 
     const { name, email, subject, message } = req.body;
 
-    // Validate environment variables
+    // 1. Save to MongoDB
+    try {
+      await connectDB();
+      const newMessage = new Message({ name, email, subject, message });
+      await newMessage.save();
+      console.log(`[Contact Serverless] Message saved to MongoDB with ID: ${newMessage._id}`);
+    } catch (dbError) {
+      console.error('[Contact Serverless] MongoDB save error:', dbError);
+      throw dbError;
+    }
+
+    // 2. Validate environment variables for email sending
     if (!process.env.EMAIL_FROM || !process.env.EMAIL_PASS || !process.env.EMAIL_TO) {
-      console.warn(`[Contact Received - MAIL CONFIG MISSING] From ${name} (${email}): ${subject}`);
+      console.warn(`[Contact Serverless - MAIL CONFIG MISSING] From ${name} (${email}): ${subject}`);
       console.log(`Message: ${message}`);
-      return res.status(200).json({ message: 'Message received successfully (Mail config missing).' });
+      return res.status(200).json({ message: 'Message received and saved successfully (Mail config missing).' });
     }
 
     const transporter = nodemailer.createTransport({

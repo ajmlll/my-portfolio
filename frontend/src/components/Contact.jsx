@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Form, Alert, Spinner } from 'react-bootstrap';
+import { Container, Row, Col, Form, Alert, Spinner, Modal } from 'react-bootstrap';
 import axios from 'axios';
 import { FaEnvelope, FaMapMarkerAlt, FaLinkedin } from 'react-icons/fa';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [status, setStatus] = useState({ sending: false, success: false, error: null });
+  const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -20,6 +21,7 @@ const Contact = () => {
       await axios.post(`${API_URL}/contact`, formData);
       setStatus({ sending: false, success: true, error: null });
       setFormData({ name: '', email: '', subject: '', message: '' });
+      setShowModal(true);
       setTimeout(() => setStatus(prev => ({ ...prev, success: false })), 5000);
     } catch (error) {
       console.error('Submit error:', error);
@@ -188,6 +190,44 @@ const Contact = () => {
           </Col>
         </Row>
       </Container>
+
+      <Modal 
+        show={showModal} 
+        onHide={() => setShowModal(false)}
+        centered
+        contentClassName="bg-dark text-light border-0"
+        style={{ backdropFilter: 'blur(8px)', backgroundColor: 'rgba(3, 7, 18, 0.4)' }}
+      >
+        <div style={{
+          backgroundColor: 'var(--bg-secondary)',
+          border: '1px solid var(--gold-border)',
+          borderRadius: '12px',
+          padding: '30px',
+          boxShadow: '0 0 30px rgba(6, 182, 212, 0.15)'
+        }}>
+          <Modal.Header closeButton closeVariant="white" className="border-0 p-0 mb-3">
+            <Modal.Title className="text-gold font-monospace">Inquiry Received</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="text-center p-0 py-3">
+            <div className="mb-4 text-gold" style={{ fontSize: '3rem', textShadow: '0 0 20px rgba(6, 182, 212, 0.4)' }}>
+              🎉
+            </div>
+            <h4 className="mb-2" style={{ fontFamily: 'var(--font-heading)' }}>Message Sent Successfully!</h4>
+            <p className="text-muted mb-0">
+              Thank you for reaching out. I've received your inquiry and will respond to you within 24 to 48 hours.
+            </p>
+          </Modal.Body>
+          <Modal.Footer className="border-0 p-0 mt-4 justify-content-center">
+            <button 
+              className="btn-gold px-5 py-2 border-0" 
+              onClick={() => setShowModal(false)}
+              style={{ width: 'auto' }}
+            >
+              Close
+            </button>
+          </Modal.Footer>
+        </div>
+      </Modal>
     </section>
   );
 };
