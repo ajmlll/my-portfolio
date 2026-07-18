@@ -51,7 +51,10 @@ router.post('/', contactLimiter, [
         await newMessage.save();
         console.log(`[Contact] Message saved to MongoDB with ID: ${newMessage._id}`);
 
-        // 2. Send email via Nodemailer
+        // 2. Respond to client immediately for instant UI response
+        res.status(200).json({ message: 'Message sent successfully!' });
+
+        // 3. Send emails in the background (non-blocking)
         if (process.env.EMAIL_FROM && process.env.EMAIL_PASS) {
             const transporter = nodemailer.createTransport({
                 host: 'smtp.gmail.com',
@@ -99,14 +102,18 @@ router.post('/', contactLimiter, [
                 `
             };
 
-            await transporter.sendMail(mailOptions);
-            await transporter.sendMail(autoReplyOptions);
-            console.log('[Contact] Notification and confirmation emails sent successfully.');
+            // Send in parallel in the background, catch errors to prevent unhandled promise rejection
+            Promise.all([
+                transporter.sendMail(mailOptions),
+                transporter.sendMail(autoReplyOptions)
+            ]).then(() => {
+                console.log('[Contact] Notification and confirmation emails sent successfully in the background.');
+            }).catch(mailError => {
+                console.error('[Contact] Background email sending failed:', mailError);
+            });
         } else {
             console.warn('[Contact] EMAIL_FROM or EMAIL_PASS not configured. Skipping email send.');
         }
-
-        res.status(200).json({ message: 'Message sent successfully!' });
 
     } catch (error) {
         console.error('Failed to process contact message:', error);

@@ -186,8 +186,10 @@ module.exports = async (req, res) => {
       `
     };
 
-    await transporter.sendMail(mailOptions);
-    await transporter.sendMail(autoReplyOptions);
+    await Promise.all([
+      transporter.sendMail(mailOptions),
+      transporter.sendMail(autoReplyOptions)
+    ]);
 
     console.log(`[Contact Received] From ${name} (${email}): ${subject}`);
 
