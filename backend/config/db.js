@@ -6,14 +6,13 @@ const connectDB = async () => {
       return;
     }
 
-    const conn = await mongoose.connect(process.env.MONGODB_URI);
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 5000
+    });
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
     console.error(`MongoDB Connection Error: ${error.message}`);
-    // Do not crash the process in production, just log the error
-    if (process.env.NODE_ENV !== 'production') {
-      process.exit(1);
-    }
+    console.warn(`[Warning] Continuing server execution without MongoDB. Whitelist your current IP in MongoDB Atlas if you want database message logging.`);
   }
 };
 

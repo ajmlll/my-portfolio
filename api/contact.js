@@ -113,15 +113,14 @@ module.exports = async (req, res) => {
 
     const { name, email, subject, message } = req.body;
 
-    // 1. Save to MongoDB
+    // 1. Save to MongoDB (Resilient - doesn't crash email sending if DB fails)
     try {
       await connectDB();
       const newMessage = new Message({ name, email, subject, message });
       await newMessage.save();
       console.log(`[Contact Serverless] Message saved to MongoDB with ID: ${newMessage._id}`);
     } catch (dbError) {
-      console.error('[Contact Serverless] MongoDB save error:', dbError);
-      throw dbError;
+      console.warn('[Contact Serverless] MongoDB save skipped/failed:', dbError.message);
     }
 
     // 2. Validate environment variables for email sending
@@ -131,13 +130,14 @@ module.exports = async (req, res) => {
       return res.status(200).json({ message: 'Message received and saved successfully (Mail config missing).' });
     }
 
+    const cleanEmailPass = (process.env.EMAIL_PASS || '').replace(/\s+/g, '');
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
       secure: true,
       auth: {
-        user: process.env.EMAIL_FROM,
-        pass: process.env.EMAIL_PASS
+        user: process.env.EMAIL_FROM.trim(),
+        pass: cleanEmailPass
       }
     });
 

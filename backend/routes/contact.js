@@ -3,6 +3,7 @@ const { check, validationResult } = require('express-validator');
 const rateLimit = require('express-rate-limit');
 const nodemailer = require('nodemailer');
 const Message = require('../models/Message');
+const mongoose = require('mongoose');
 
 const router = express.Router();
 
@@ -46,78 +47,93 @@ router.post('/', contactLimiter, [
     console.log(`[Contact] From ${name} <${email}>: ${subject}`);
 
     try {
-        // 1. Save to MongoDB
-        const newMessage = new Message({ name, email, subject, message });
-        await newMessage.save();
-        console.log(`[Contact] Message saved to MongoDB with ID: ${newMessage._id}`);
-
-        // 2. Respond to client immediately for instant UI response
-        res.status(200).json({ message: 'Message sent successfully!' });
-
-        // 3. Send emails in the background (non-blocking)
-        if (process.env.EMAIL_FROM && process.env.EMAIL_PASS) {
-            const transporter = nodemailer.createTransport({
-                host: 'smtp.gmail.com',
-                port: 465,
-                secure: true,
-                auth: {
-                    user: process.env.EMAIL_FROM,
-                    pass: process.env.EMAIL_PASS
-                }
-            });
-
-            const mailOptions = {
-                from: `"Portfolio Contact" <${process.env.EMAIL_FROM}>`,
-                to: process.env.EMAIL_TO || process.env.EMAIL_FROM,
-                subject: `📬 Portfolio Contact: ${subject}`,
-                replyTo: email,
-                html: `
-                    <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #0d0d0d; color: #f0ece3; max-width: 600px; margin: 0 auto; border: 1px solid #c9a84c; border-radius: 8px;">
-                        <h2 style="color: #c9a84c; border-bottom: 1px solid #333; padding-bottom: 10px;">New Contact Message</h2>
-                        <p><strong>Name:</strong> ${name}</p>
-                        <p><strong>Email:</strong> ${email}</p>
-                        <p><strong>Subject:</strong> ${subject}</p>
-                        <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;" />
-                        <p><strong>Message:</strong></p>
-                        <p style="white-space: pre-wrap; background-color: #111; padding: 15px; border-left: 4px solid #c9a84c; border-radius: 4px;">${message}</p>
-                    </div>
-                `
-            };
-
-            const autoReplyOptions = {
-                from: `"Muhammed Ajmal PM" <${process.env.EMAIL_FROM}>`,
-                to: email,
-                subject: `Confirmation: I've received your message!`,
-                html: `
-                    <div style="font-family: Arial, sans-serif; padding: 20px; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto;">
-                        <h2 style="color: #c9a84c;">Hello ${name},</h2>
-                        <p>Thank you for reaching out through my portfolio website. I have successfully received your message regarding <strong>"${subject}"</strong>.</p>
-                        <p>I typically respond within 24-48 hours. If your request is urgent, feel free to connect with me on LinkedIn.</p>
-                        <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
-                        <p>Best regards,<br/><strong>Muhammed Ajmal PM</strong><br/>Full Stack Developer</p>
-                        <div style="font-size: 12px; color: #999; margin-top: 20px;">
-                            <p>This is an automated confirmation. Please do not reply directly to this email.</p>
-                        </div>
-                    </div>
-                `
-            };
-
-            // Send in parallel in the background, catch errors to prevent unhandled promise rejection
-            Promise.all([
-                transporter.sendMail(mailOptions),
-                transporter.sendMail(autoReplyOptions)
-            ]).then(() => {
-                console.log('[Contact] Notification and confirmation emails sent successfully in the background.');
-            }).catch(mailError => {
-                console.error('[Contact] Background email sending failed:', mailError);
-            });
+        // 1. Save to MongoDB (Non-blocking / resilient - doesn't crash or delay email if DB is unreachable)
+        if (mongoose.connection.readyState >= 1) {
+            try {
+                const newMessage = new Message({ name, email, subject, message });
+                await newMessage.save();
+                console.log(`[Contact] Message saved to MongoDB with ID: ${newMessage._id}`);
+            } catch (dbError) {
+                console.warn(`[Contact] MongoDB save skipped/failed: ${dbError.message}`);
+            }
         } else {
-            console.warn('[Contact] EMAIL_FROM or EMAIL_PASS not configured. Skipping email send.');
+            console.log(`[Contact] MongoDB offline or not connected; proceeding directly to email dispatch.`);
         }
+
+        // 2. Validate email credentials
+        if (!process.env.EMAIL_FROM || !process.env.EMAIL_PASS) {
+            console.warn('[Contact] EMAIL_FROM or EMAIL_PASS not configured in .env');
+            return res.status(500).json({ message: 'Email service credentials are not configured on the server.' });
+        }
+
+        const cleanEmailPass = (process.env.EMAIL_PASS || '').replace(/\s+/g, '');
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure: true,
+            auth: {
+                user: process.env.EMAIL_FROM.trim(),
+                pass: cleanEmailPass
+            }
+        });
+
+        const recipient = process.env.EMAIL_TO ? process.env.EMAIL_TO.trim() : process.env.EMAIL_FROM.trim();
+
+        const mailOptions = {
+            from: `"Portfolio Contact" <${process.env.EMAIL_FROM.trim()}>`,
+            to: recipient,
+            subject: `📬 Portfolio Contact: ${subject}`,
+            replyTo: email,
+            html: `
+                <div style="font-family: Arial, sans-serif; padding: 20px; background-color: #0d0d0d; color: #f0ece3; max-width: 600px; margin: 0 auto; border: 1px solid #c9a84c; border-radius: 8px;">
+                    <h2 style="color: #c9a84c; border-bottom: 1px solid #333; padding-bottom: 10px;">New Contact Message</h2>
+                    <p><strong>Name:</strong> ${name}</p>
+                    <p><strong>Email:</strong> ${email}</p>
+                    <p><strong>Subject:</strong> ${subject}</p>
+                    <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;" />
+                    <p><strong>Message:</strong></p>
+                    <p style="white-space: pre-wrap; background-color: #111; padding: 15px; border-left: 4px solid #c9a84c; border-radius: 4px;">${message}</p>
+                </div>
+            `
+        };
+
+        const autoReplyOptions = {
+            from: `"Muhammed Ajmal PM" <${process.env.EMAIL_FROM.trim()}>`,
+            to: email,
+            subject: `Confirmation: I've received your message!`,
+            html: `
+                <div style="font-family: Arial, sans-serif; padding: 20px; color: #333; line-height: 1.6; max-width: 600px; margin: 0 auto;">
+                    <h2 style="color: #c9a84c;">Hello ${name},</h2>
+                    <p>Thank you for reaching out through my portfolio website. I have successfully received your message regarding <strong>"${subject}"</strong>.</p>
+                    <p>I typically respond within 24-48 hours. If your request is urgent, feel free to connect with me on LinkedIn.</p>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 30px 0;">
+                    <p>Best regards,<br/><strong>Muhammed Ajmal PM</strong><br/>Full Stack Developer</p>
+                    <div style="font-size: 12px; color: #999; margin-top: 20px;">
+                        <p>This is an automated confirmation. Please do not reply directly to this email.</p>
+                    </div>
+                </div>
+            `
+        };
+
+        // Send primary notification email first
+        await transporter.sendMail(mailOptions);
+        console.log(`[Contact] Notification email delivered to ${recipient}`);
+
+        // Send confirmation auto-reply non-blockingly
+        transporter.sendMail(autoReplyOptions)
+            .then(() => console.log(`[Contact] Auto-reply sent to ${email}`))
+            .catch(err => console.warn('[Contact] Auto-reply warning:', err.message));
+
+        res.status(200).json({ message: 'Message sent successfully!' });
 
     } catch (error) {
         console.error('Failed to process contact message:', error);
-        res.status(500).json({ message: 'Server error. Please try again later.' });
+        if (error.code === 'EAUTH') {
+            return res.status(500).json({ 
+                message: 'Gmail authentication failed: App Password was rejected. Please generate a new 16-character App Password.' 
+            });
+        }
+        res.status(500).json({ message: error.message || 'Server error. Please try again later.' });
     }
 });
 
